@@ -31,26 +31,30 @@
     }
   };
   const createTodo = async () => {
-    let todo = {
-      title: title,
-      description: description,
-      userId: 0,
-    };
-    console.log(title);
-    try {
-      const rawResponse = await fetch(endpoints.server + "/todos", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(todo),
-      });
-      response = await rawResponse.json();
-      console.log(response);
-      getTodos();
-    } catch (error) {
-      console.error(error);
+    if (title != "" || description != "") {
+      let todo = {
+        title: title,
+        description: description,
+        userId: 0,
+      };
+      console.log(title);
+      try {
+        const rawResponse = await fetch(endpoints.server + "/todos", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(todo),
+        });
+        response = await rawResponse.json();
+        console.log(response);
+        title = "";
+        description = "";
+        getTodos();
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
   const removeTodo = async (id) => {
@@ -92,75 +96,44 @@
   };
 </script>
 
-<div
-  class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans"
->
-  <div class="bg-red rounded shadow p-6 m-4 w-full lg:w-3/4">
+<div class="h-100 w-full flex items-center justify-center bg-teal-lightest">
+  <div class="bg-red rounded shadow p-6 m-4 w-full lg:w-3/4 bg-gray-200">
     <div class="mb-4">
-      <h1 class="text-grey-darkest">Todo List</h1>
-      <div class="flex mt-4">
+      <h1 class="text-3xl text-center text-gray-700 pb-4">Todo List</h1>
+      <div class="w-full flex flex-col gap-2 sm:flex-row items-center">
         <input
           bind:value={title}
-          class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
+          class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-gray-600"
           placeholder="Title"
         />
         <input
           bind:value={description}
-          class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
+          class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-gray-600"
           placeholder="Description"
         />
         <button
           on:click|preventDefault={createTodo}
-          class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-red hover:bg-teal"
+          class="flex-no-shrink p-2 rounded-lg text-white bg-gray-500 hover:text-red hover:bg-gray-700"
           >Add</button
         >
       </div>
       <br />
-      {#each todos as todo, Index (todo.id)}
-        <div>
-          <TodoInput {todo} {removeTodo} {editTodo} />
-          <!-- <div class="flex mb-4 items-center">
-            <div class="w-full">
-              <p class="w-full text-grey-darkest">
-                {todo.title}
-              </p>
-              <p class="w-full text-grey-darkest">
-                {todo.description}
-              </p>
-            </div>
-            <button
-              on:click|preventDefault={() =>
-                (editButtonClick = editButtonClick ? false : true)}
-              class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red"
-              >Edit</button
-            >
-            <button
-              on:click|preventDefault={() => removeTodo(todo.id)}
-              class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red"
-              >Remove</button
-            >
-          </div> -->
-        </div>
-        <!-- {#if editButtonClick}
-          <div class="flex mt-4">
-            <input
-              bind:value={title}
-              class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
-              placeholder="New Title"
-            />
-            <input
-              bind:value={description}
-              class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
-              placeholder="New Description"
-            />
-            <button
-              on:click|preventDefault={() => editTodo(todo.id)}
-              class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-white hover:bg-teal"
-              >Update</button
-            >
+      <div class="flex flex-col-reverse">
+        {#each todos as todo, Index (todo.id)}
+          <div class="shadow m-2 bg-gray-100 rounded-lg">
+            <TodoInput {todo} {removeTodo} {editTodo} />
           </div>
-        {/if} -->
-      {/each}
+        {/each}
+      </div>
     </div>
   </div>
 </div>
+
+<svelte:head>
+  <style>
+    body {
+      --tw-bg-opacity: 1;
+      background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+    }
+  </style>
+</svelte:head>

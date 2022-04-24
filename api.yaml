@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Todo
+  title: Daniel Todo
   description: Todo example
   version: 1.0.0
 servers:
@@ -55,6 +55,8 @@ components:
         - title
         - description
         - userId
+    # Did not get through with creating User todos
+    # Tried filtering by userId from Todos but was unsuccessful
     User:
       type: object
       properties:
@@ -78,10 +80,10 @@ paths:
               example: |
                 <html>
                   <head>
-                      <title>Health</title>
+                      <title>Todo</title>
                   </head>
                   <body> 
-                   This is a landing page 
+                   This is a landing page for Todo Server 
                   </body>
                 </html>
   /api/json:
@@ -107,6 +109,8 @@ paths:
               schema:
                 type: string
 
+  # user routes
+  # not used in todo application
   /users:
     post:
       operationId: Add User
@@ -181,7 +185,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/User"
-
+  # user routes by id
+  # not used in todo application
   /users/{id}:
     get:
       parameters:
@@ -214,6 +219,7 @@ paths:
         400:
           description: Item doesn't exist
 
+  # todo routes
   /todos:
     post:
       operationId: Add Todo

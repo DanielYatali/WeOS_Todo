@@ -1,3 +1,4 @@
+<!-- This component displays a single Todo -->
 <script>
   import TodoUpdate from "./todoUpdate.svelte";
   let editButtonClick = false;
@@ -5,6 +6,7 @@
   export let removeTodo;
   export let editTodo;
 
+  //This function is used to change the visibilty of the TodoUpdate component
   const setEditButtonClick = () => {
     editButtonClick = false;
   };
@@ -21,12 +23,14 @@
       </p>
     </div>
     <div class="sm:flex gap-3">
+      <!-- Cycles between edit components visibilty -->
       <button
         on:click|preventDefault={() =>
           (editButtonClick = editButtonClick ? false : true)}
         class="flex-no-shrink p-2 rounded-lg text-white bg-gray-500 hover:text-red hover:bg-gray-700"
         >Edit</button
       >
+      <!-- Remove button , on click deletes todo -->
       <button
         on:click|preventDefault={() => removeTodo(todo.id)}
         class="flex-no-shrink p-2 rounded-lg text-white bg-gray-500 hover:text-red hover:bg-gray-700"

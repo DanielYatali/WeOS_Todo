@@ -1,11 +1,14 @@
 <script>
   let updateDescription = "";
   let updateTitle = "";
+
+  //accepting props
   export let todo;
   export let editTodo;
   export let setEditButtonClick;
+
   const editCurrentTodo = () => {
-    if (updateDescription != "" || updateTitle != "") {
+    if (updateDescription != "" && updateTitle != "") {
       todo.description = updateDescription;
       todo.title = updateTitle;
       setEditButtonClick();

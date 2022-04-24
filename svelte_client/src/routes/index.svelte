@@ -1,19 +1,20 @@
+<!-- Homepage of todo app -->
 <script>
   import { endpoints } from "$lib/endpoints";
   import { onMount } from "svelte";
   import TodoInput from "../components/todoInput.svelte";
-  import todoInput from "../components/todoInput.svelte";
 
   let response = {};
   let todos = [];
   let description = "";
   let title = "";
-  let updateDescription = "";
-  let updateTitle = "";
-  let editButtonClick = false;
+
+  //When component mounted fetch all todos
   onMount(() => {
     getTodos();
   });
+
+  //Fetches all todos from WeOS server
   const getTodos = async () => {
     try {
       const rawResponse = await fetch(endpoints.server + "/todos", {
@@ -30,8 +31,11 @@
       console.error(error);
     }
   };
+
+  //Creates a todo
   const createTodo = async () => {
-    if (title != "" || description != "") {
+    //Prevent user from making blank todo
+    if (title != "" && description != "") {
       let todo = {
         title: title,
         description: description,
@@ -51,12 +55,15 @@
         console.log(response);
         title = "";
         description = "";
+        //Fetches updated todo list
         getTodos();
       } catch (error) {
         console.error(error);
       }
     }
   };
+
+  //Removes a todo
   const removeTodo = async (id) => {
     try {
       const rawResponse = await fetch(endpoints.server + "/todos/" + id, {
@@ -68,12 +75,14 @@
       });
       response = await rawResponse.json();
       console.log(response);
+      //Fetches updates todo list
       getTodos();
     } catch (error) {
       console.error(error);
     }
   };
 
+  //Edits todo by sending updated values to WeOS server
   const editTodo = async (updateTodo) => {
     try {
       const rawResponse = await fetch(
@@ -89,6 +98,7 @@
       );
       let response = await rawResponse.json();
       console.log(response);
+      //Fetching updated todo list
       getTodos();
     } catch (error) {
       console.error(error);
@@ -101,11 +111,13 @@
     <div class="mb-4">
       <h1 class="text-3xl text-center text-gray-700 pb-4">Todo List</h1>
       <div class="w-full flex flex-col gap-2 sm:flex-row items-center">
+        <!-- binds the title variable to the users input -->
         <input
           bind:value={title}
           class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-gray-600"
           placeholder="Title"
         />
+        <!-- binds the description variable to the users input -->
         <input
           bind:value={description}
           class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-gray-600"

@@ -40,15 +40,6 @@ components:
           type: string
         userId:
           type: integer
-
-        # categories:
-        #   type: array
-        #   items:
-        #     $ref: "#/components/schemas/Category"
-        # posts:
-        #   type: array
-        #   items:
-        #     $ref: "#/components/schemas/Post"
         lastUpdated:
           type: string
           format: date-time
@@ -64,22 +55,6 @@ components:
         - title
         - description
         - userId
-    # Post:
-    #   type: object
-    #   properties:
-    #     title:
-    #       type: string
-    #     description:
-    #       type: string
-    #     author:
-    #       $ref: "#/components/schemas/Author"
-    #     categories:
-    #       type: array
-    #       items:
-    #         $ref: "#/components/schemas/Category"
-    #     created:
-    #       type: string
-    #       format: date-time
     User:
       type: object
       properties:
@@ -239,53 +214,6 @@ paths:
         400:
           description: Item doesn't exist
 
-  # /users/{userId}/todos:
-  #   get:
-  #     operationId: Get User Todos
-  #     summary: Get List of User Todos
-  #     parameters:
-  #      - in: 'path'
-  #         name: 'userId'
-  #         schema:
-  #           type: integer
-  #       - in: query
-  #         name: filters
-  #         schema:
-  #           type: array
-  #           items:
-  #             type: object
-  #             properties:
-  #               field:
-  #                 type: string
-  #               operator:
-  #                 type: string
-  #               values:
-  #                 type: array
-  #                 items:
-  #                   type: string
-
-  #         required: false
-  #         description: query string
-  #     x-context:
-  #       _filters:
-  #         - field: userId
-  #           operator: eq
-  #           value: 4
-  #     responses:
-  #       200:
-  #         description: List of todos
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 total:
-  #                   type: integer
-  #                 items:
-  #                   type: array
-  #                   items:
-  #                     $ref: "#/components/schemas/Todo"
-
   /todos:
     post:
       operationId: Add Todo
@@ -345,13 +273,6 @@ paths:
 
           required: false
           description: query string
-      x-context:
-        _filters:
-          - field: id
-            operator: eq
-            value: 1
-      # page: 1
-      # limit: 10
       responses:
         200:
           description: List of todos
@@ -367,21 +288,21 @@ paths:
                     items:
                       $ref: "#/components/schemas/Todo"
 
-  /todos/{userId}:
+  /todos/{id}:
     get:
       parameters:
         - in: path
-          name: userId
+          name: id
           schema:
             type: integer
           required: true
-          description: todo userId
+          description: todo id
         - in: query
-          name: userId
+          name: sequence_no
           schema:
             type: integer
         - in: query
-          name: userId
+          name: use_entity_id
           schema:
             type: boolean
           required: false

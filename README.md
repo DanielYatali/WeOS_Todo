@@ -7,7 +7,7 @@
 
 ## 🚀 How to Run
 1. Run the API `weos -spec=api.yaml -port=8680` or open `weos.exe`
-2. Navigate to `svelte-client` -> `cd svelte-client`
+2. Navigate to `svelte_client` -> `cd svelte_client`
 3. Run `npm install` & `npm run dev`
 4. Goto `localhost:3000`
 

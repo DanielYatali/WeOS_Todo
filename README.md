@@ -3,7 +3,7 @@
 [![](https://user-images.githubusercontent.com/70588497/164994912-80caad14-dc76-4e88-b3f9-ef70b69758b7.png)](https://youtu.be/pi_OcTZznSM)
 
 ## Description
-#### Simple todo app that test the api creation software [WeOS](https://github.com/wepala/weos)
+#### Simple todo app that tests the api creation software [WeOS](https://github.com/wepala/weos)
 
 ## 🚀 How to Run
 1. Run the API `weos -spec=api.yaml -port=8680` or open `weos.exe`

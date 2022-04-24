@@ -26,7 +26,7 @@
       });
       response = await rawResponse.json();
       todos = response.items;
-      console.log(todos);
+      // console.log(todos);
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +41,6 @@
         description: description,
         userId: 0,
       };
-      console.log(title);
       try {
         const rawResponse = await fetch(endpoints.server + "/todos", {
           method: "POST",
@@ -52,7 +51,7 @@
           body: JSON.stringify(todo),
         });
         response = await rawResponse.json();
-        console.log(response);
+        // console.log(response);
         title = "";
         description = "";
         //Fetches updated todo list
@@ -74,7 +73,7 @@
         },
       });
       response = await rawResponse.json();
-      console.log(response);
+      // console.log(response);
       //Fetches updates todo list
       getTodos();
     } catch (error) {
@@ -97,7 +96,7 @@
         }
       );
       let response = await rawResponse.json();
-      console.log(response);
+      // console.log(response);
       //Fetching updated todo list
       getTodos();
     } catch (error) {

@@ -1,4 +1,5 @@
-# [Watch Demo](https://youtu.be/pi_OcTZznSM)
+# Todo App using [WeOS](https://github.com/wepala/weos)
+## [Watch Demo](https://youtu.be/pi_OcTZznSM)
 [![](https://user-images.githubusercontent.com/70588497/164994912-80caad14-dc76-4e88-b3f9-ef70b69758b7.png)](https://youtu.be/pi_OcTZznSM)
 
 ## Todo App
